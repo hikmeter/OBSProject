@@ -1,0 +1,90 @@
+﻿@model GetExamsWithCoursesAndTeachersDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h4 class="mb-1">🔍 Sınav Sorgulama</h4>
+                                <p class="text-muted mb-0">Öğretim üyeleri tarafından tanımlanan sınavları görüntüleyebilir, düzenleyebilir ya da silebilirsiniz.</p>
+                            </div>
+                            <a href="/AdminExam/CreateExam" class="btn btn-primary">
+                                + Yeni Sınav Ekle
+                            </a>
+                        </div>
+                        <form method="get" id="searchForm">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="id" class="form-label">Sınav ID</label>
+                                    <input asp-for="examID" id="id" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="courseName" class="form-label">Ders Adı</label>
+                                    <input asp-for="courseName" id="courseName" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="teacherName" class="form-label">Öğretim Üyesi Adı</label>
+                                    <input asp-for="teacherName" id="teacherName" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="teacherSurname" class="form-label">Öğretim Üyesi Soyadı</label>
+                                    <input asp-for="teacherSurname" id="teacherSurname" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="examName" class="form-label">Sınav Adı</label>
+                                    <input asp-for="examName" id="examName" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="weight" class="form-label">Ağırlık Oranı</label>
+                                    <input asp-for="weight" id="weight" type="number" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="createdTime" class="form-label">Oluşturulma Tarihi</label>
+                                    <input asp-for="createdTime" id="createdTime" type="date" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="feather-search me-1"></i> Sorgula
+                                </button>
+                                <a href="/AdminExam" class="btn btn-outline-secondary">Geri Dön</a>
+                            </div>
+                        </form>
+                        <div id="searchResults">
+                            @await Html.PartialAsync("SearchResult", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("searchForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        let form = new FormData(this);
+        let queryString = new URLSearchParams(form).toString();
+        const response = await fetch(`/AdminExam/SearchResult?${queryString}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+        if (response.ok) {
+            const data = await response.text();
+            document.getElementById("searchResults").innerHTML = data;
+        } else {
+            console.error("Bir hata oluştu.");
+        }
+    });
+</script>

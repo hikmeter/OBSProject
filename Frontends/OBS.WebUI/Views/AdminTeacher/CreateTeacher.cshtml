@@ -1,0 +1,63 @@
+﻿@model CreateTeacherDto
+@{
+    ViewData["Title"] = "CreateTeacher";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h4 class="mb-4">👩‍🏫 Öğretim Üyesi Ekle</h4>
+                        <form method="post">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <div class="mb-3">
+                                <label asp-for="name" class="form-label">Öğretim Üyesi Adı</label>
+                                <input asp-for="name" class="form-control" />
+                                <span asp-validation-for="name" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="surname" class="form-label">Öğretim Üyesi Soyadı</label>
+                                <input asp-for="surname" class="form-control" />
+                                <span asp-validation-for="surname" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="email" class="form-label">E-Mail Adresi</label>
+                                <input asp-for="email" class="form-control" />
+                                <span asp-validation-for="email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="password" class="form-label">Şifre</label>
+                                <input asp-for="password" class="form-control" />
+                                <span asp-validation-for="password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="departmentID" class="form-label">Bölüm</label>
+                                @Html.DropDownListFor(x => x.departmentID, (List<SelectListItem>)ViewBag.DepartmentValues, "-- Bölüm Seçin --", new { @class = "form-control" })
+                                <span asp-validation-for="departmentID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="title" class="form-label">Unvan</label>
+                                @Html.DropDownListFor(x => x.title, new List<SelectListItem>
+                                {
+                                new SelectListItem { Text = "Araştırma Görevlisi", Value = "Araştırma Görevlisi" },
+                                new SelectListItem { Text = "Doktor Öğretim Üyesi", Value = "Doktor Öğretim Üyesi" },
+                                new SelectListItem { Text = "Doçent Doktor", Value = "Doçent Doktor" },
+                                new SelectListItem { Text = "Profesör Doktor", Value = "Profesör Doktor" }
+                                }, "-- Unvan Seçin --", new { @class = "form-control" })
+                                <span asp-validation-for="title" class="text-danger"></span>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-1"></i> Öğretim Üyesi Ekle
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

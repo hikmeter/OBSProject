@@ -1,0 +1,34 @@
+﻿@model UpdateFacultyDto
+@{
+    ViewData["Title"] = "Update Faculty";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">
+                            <i class="feather-edit me-1"></i> Fakülte Güncelle
+                        </h4>
+                        <form method="post">
+                            <input type="hidden" asp-for="facultyID" />
+                            <div class="form-group mb-3">
+                                <label for="facultyName">Fakülte Adı</label>
+                                <input type="text" class="form-control" id="facultyName" asp-for="facultyName" required>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="submit" class="btn btn-success waves-effect waves-light">
+                                    <i class="feather-check-circle me-1"></i> Güncelle
+                                </button>
+                                <a href="/AdminFaculty" class="btn btn-outline-secondary">Geri Dön</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model CreateAdvisorDto
+@{
+    ViewData["Title"] = "CreateAdvisor";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h4 class="mb-4">👨‍🏫 Danışmanlık Ekle</h4>
+                        <form method="post">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <div class="mb-3">
+                                <label asp-for="teacherID" class="form-label">Öğretim Üyesi</label>
+                                @Html.DropDownListFor(x => x.teacherID, (List<SelectListItem>)ViewBag.TeacherValues, "-- Öğretim Üyesi Seçin --", new { @class = "form-control" })
+                                <span asp-validation-for="teacherID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="studentID" class="form-label">Öğrenci</label>
+                                @Html.DropDownListFor(x => x.studentID, (List<SelectListItem>)ViewBag.StudentValues, "-- Öğrenci Seçin --", new { @class = "form-control" })
+                                <span asp-validation-for="studentID" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="meetingDay" class="form-label">Görüşme Günü</label>
+                                <select asp-for="meetingDay" class="form-control">
+                                    <option value="">-- Gün Seçin --</option>
+                                    <option value="Pazartesi">Pazartesi</option>
+                                    <option value="Salı">Salı</option>
+                                    <option value="Çarşamba">Çarşamba</option>
+                                    <option value="Perşembe">Perşembe</option>
+                                    <option value="Cuma">Cuma</option>
+                                </select>
+                                <span asp-validation-for="meetingDay" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="meetingTime" class="form-label">Görüşme Saati</label>
+                                <input asp-for="meetingTime" type="time" class="form-control" />
+                                <span asp-validation-for="meetingTime" class="text-danger"></span>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle me-1"></i> Danışmanlık Ekle
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

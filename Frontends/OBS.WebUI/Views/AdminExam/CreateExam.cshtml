@@ -1,0 +1,44 @@
+﻿@model CreateExamDto
+
+@{
+    ViewData["Title"] = "Yeni Sınav Ekle";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">
+                            <i class="feather-plus-circle me-1"></i> Yeni Sınav Ekle
+                        </h4>
+                        <form method="post">
+                            <div class="form-group mb-3">
+                                <label for="facultyID">Ders Adı</label>
+                                @Html.DropDownListFor(x => x.courseID, (List<SelectListItem>)ViewBag.CourseValues, new { @class = "form-control", required = true })
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="examName">Sınav Adı</label>
+                                <input type="text" class="form-control" id="examName" asp-for="examName" required />
+                                <span asp-validation-for="examName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="weight">Ağırlık Oranı</label>
+                                <input type="number" class="form-control" id="weight" asp-for="weight" required />
+                                <span asp-validation-for="weight" class="text-danger"></span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                    <i class="feather-save me-1"></i> Sınavı Ekle
+                                </button>
+                                <a href="/AdminExam" class="btn btn-outline-secondary">Geri Dön</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

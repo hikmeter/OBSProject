@@ -1,0 +1,37 @@
+﻿@model CreateDepartmentDto
+@{
+    ViewData["Title"] = "Create Department";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">
+                            <i class="feather-plus-circle me-1"></i> Yeni Bölüm Ekle
+                        </h4>
+                        <form method="post">
+                            <div class="form-group mb-3">
+                                <label for="departmentName">Bölüm Adı</label>
+                                <input type="text" class="form-control" id="departmentName" asp-for="departmentName"  required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="facultyID">Fakülte</label>
+                                @Html.DropDownListFor(x => x.facultyID, (List<SelectListItem>)ViewBag.FacultyValues, new { @class = "form-control", required = true })
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                    <i class="feather-save me-1"></i> Bölüm Ekle
+                                </button>
+                                <a href="/AdminDepartment" class="btn btn-outline-secondary">Geri Dön</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

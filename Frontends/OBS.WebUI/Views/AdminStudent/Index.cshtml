@@ -1,0 +1,75 @@
+﻿@model GetStudentsWithDepartmentsDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h4 class="mb-1">🎓 Öğrenci Sorgulama</h4>
+                                <p class="text-muted mb-0">Öğrenci bilgilerini girerek arama yapabilirsiniz.</p>
+                            </div>
+                            <a href="/AdminStudent/CreateStudent" class="btn btn-primary">
+                                + Yeni Öğrenci Ekle
+                            </a>
+                        </div>
+                        <form method="get" id="searchForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="studentNo" class="form-label">Öğrenci No</label>
+                                    <input name="studentNo" id="studentNo" class="form-control" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Ad</label>
+                                    <input name="name" id="name" class="form-control" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="surname" class="form-label">Soyad</label>
+                                    <input name="surname" id="surname" class="form-control" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="departmentName" class="form-label">Bölüm Adı</label>
+                                    <input name="departmentName" id="departmentName" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="feather-search me-1"></i> Sorgula
+                                </button>
+                                <a href="/AdminStudent" class="btn btn-outline-secondary">Geri Dön</a>
+                            </div>
+                        </form>
+                        <div id="searchResults">
+                            @await Html.PartialAsync("SearchStudent", Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("searchForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        let form = new FormData(this);
+        let queryString = new URLSearchParams(form).toString();
+        const response = await fetch(`/AdminStudent/SearchStudent?${queryString}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+        if (response.ok) {
+            const data = await response.text();
+            document.getElementById("searchResults").innerHTML = data;
+        } else {
+            console.error("Bir hata oluştu.");
+        }
+    });
+</script>

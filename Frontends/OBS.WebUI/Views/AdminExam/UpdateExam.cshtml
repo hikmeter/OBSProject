@@ -1,0 +1,44 @@
+﻿@model UpdateExamDto
+
+@{
+    ViewData["Title"] = "UpdateExam";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h4 class="mb-4">✏️ Sınav Güncelle</h4>
+                        <form method="post">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <input type="hidden" asp-for="examID" />
+                            <div class="mb-3">
+                                <label asp-for="examName" class="form-label">Sınav Adı</label>
+                                <input asp-for="examName" class="form-control" />
+                                <span asp-validation-for="examName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="weight" class="form-label">Ağırlık Oranı</label>
+                                <input asp-for="weight" type="number" class="form-control" />
+                                <span asp-validation-for="weight" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="createdTime" class="form-label">Oluşturulma Tarihi</label>
+                                <input asp-for="createdTime" type="date" class="form-control" />
+                                <span asp-validation-for="createdTime" class="text-danger"></span>
+                            </div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-save me-1"></i> Güncelle
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

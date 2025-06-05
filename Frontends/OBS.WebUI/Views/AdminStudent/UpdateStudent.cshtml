@@ -1,0 +1,52 @@
+﻿@model UpdateStudentDto
+@{
+	ViewData["Title"] = "UpdateStudent";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 offset-xl-2">
+				<div class="card shadow-sm border-0">
+					<div class="card-body">
+						<h4 class="mb-4">✏️ Ders Güncelle</h4>
+						<form method="post">
+							@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+							<input type="hidden" asp-for="studentID" />
+							<input type="hidden" asp-for="email" />
+							<input type="hidden" asp-for="password" />
+							<input type="hidden" asp-for="birthDate" />
+							<input type="hidden" asp-for="gender" />
+							<div class="mb-3">
+								<label asp-for="studentNo" class="form-label">Öğrenci No</label>
+								<input asp-for="studentNo" class="form-control" />
+								<span asp-validation-for="studentNo" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="name" class="form-label">Adı</label>
+								<input asp-for="name" class="form-control" />
+								<span asp-validation-for="name" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="surname" class="form-label">Soyadı</label>
+								<input asp-for="surname" class="form-control" />
+								<span asp-validation-for="surname" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="departmentID" class="form-label">Bölüm</label>
+								@Html.DropDownListFor(x => x.departmentID, (List<SelectListItem>)ViewBag.DepartmentValues, "-- Bölüm Seçin --", new { @class = "form-control" })
+								<span asp-validation-for="departmentID" class="text-danger"></span>
+							</div>
+							<div class="text-end">
+								<button type="submit" class="btn btn-primary">
+									<i class="bi bi-save me-1"></i> Güncelle
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

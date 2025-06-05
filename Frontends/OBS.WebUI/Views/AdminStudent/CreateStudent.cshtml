@@ -1,0 +1,76 @@
+﻿@model CreateStudentDto
+@{
+	ViewData["Title"] = "CreateStudent";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="page-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-8 offset-xl-2">
+				<div class="card shadow-sm border-0">
+					<div class="card-body">
+						<h4 class="mb-4">➕ Öğrenci Ekle</h4>
+						<form method="post">
+							@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+							<div class="mb-3">
+								<label asp-for="studentNo" class="form-label">Öğrenci Numarası</label>
+								<input asp-for="studentNo" class="form-control" value="@ViewBag.sNumber" readonly />
+								<span asp-validation-for="studentNo" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="name" class="form-label">Adı</label>
+								<input asp-for="name" class="form-control" />
+								<span asp-validation-for="name" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="surname" class="form-label">Soyadı</label>
+								<input asp-for="surname" class="form-control" />
+								<span asp-validation-for="surname" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="email" class="form-label">E-Mail Adresi</label>
+								<input asp-for="email" type="email" class="form-control" />
+								<span asp-validation-for="email" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label asp-for="password" class="form-label">Şifresi</label>
+								<input asp-for="password" class="form-control" value="@ViewBag.sNumber" readonly />
+								<span asp-validation-for="password" class="text-danger"></span>
+								<p>Her öğrencinin şifresi varsayılan olarak öğrenci numarasıdır. Sisteme ilk defa giriş yapıldığında mutlaka değiştirilmelidir.</p>
+							</div>
+							<div class="mb-3">
+								<label asp-for="birthDate" class="form-label">Doğum Tarihi</label>
+								<input asp-for="birthDate" type="date" class="form-control" />
+								<span asp-validation-for="birthDate" class="text-danger"></span>
+							</div>
+							<div class="mb-3">
+								<label class="form-label d-block">Cinsiyet</label>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" asp-for="gender" value="Kadın" id="genderKadın" />
+									<label class="form-check-label" for="genderKadın">Kadın</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" asp-for="gender" value="Erkek" id="genderErkek" />
+									<label class="form-check-label" for="genderErkek">Erkek</label>
+								</div>
+								<span asp-validation-for="gender" class="text-danger d-block mt-1"></span>
+							</div>
+
+							<div class="mb-3">
+								<label asp-for="departmentID" class="form-label">Bölüm</label>
+								@Html.DropDownListFor(x => x.departmentID, (List<SelectListItem>)ViewBag.DepartmentValues, "-- Bölüm Seçin --", new { @class = "form-control" })
+								<span asp-validation-for="departmentID" class="text-danger"></span>
+							</div>
+							<div class="text-end">
+								<button type="submit" class="btn btn-primary">
+									<i class="bi bi-plus-circle me-1"></i> Öğrenci Ekle
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
